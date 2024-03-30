@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibraryServer.LibraryModel;
+using System.Diagnostics.Metrics;
 
 namespace LibraryServer.Controllers
 {
@@ -19,6 +20,20 @@ namespace LibraryServer.Controllers
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {
             return await context.Books.ToListAsync();
+        }
+
+        // GET: api/Books/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Book>> GetBook(int id)
+        {
+            var country = await context.Books.FindAsync(id);
+
+            if (country == null)
+            {
+                return NotFound();
+            }
+
+            return country;
         }
 
         [HttpPost]
