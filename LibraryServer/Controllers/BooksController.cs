@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LibraryServer.LibraryModel;
 using System.Diagnostics.Metrics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryServer.Controllers
 {
@@ -16,6 +17,7 @@ namespace LibraryServer.Controllers
     {
 
         // GET: api/Books
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {

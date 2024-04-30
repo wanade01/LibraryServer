@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryServer.LibraryModel;
 
-public partial class LibraryGoldenContext : DbContext
+public partial class LibraryGoldenContext : IdentityDbContext<LibraryUser>
 {
     public LibraryGoldenContext()
     {
@@ -25,6 +26,7 @@ public partial class LibraryGoldenContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Book>(entity =>
         {
             entity.ToTable("Book");
