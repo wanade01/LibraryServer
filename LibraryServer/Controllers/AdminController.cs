@@ -15,14 +15,14 @@ namespace LibraryServer.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginRequest loginRequest)
         {
-            LibraryUser? user = await userManager.FindByNameAsync(loginRequest.UserName);
+            LibraryUser? user = await userManager.FindByNameAsync(loginRequest.userName);
 
             if (user == null)
             {
                 return Unauthorized("Incorrect username or password");
             }
 
-            bool success = await userManager.CheckPasswordAsync(user, loginRequest.Password);
+            bool success = await userManager.CheckPasswordAsync(user, loginRequest.password);
 
             if (!success)
             {
@@ -30,7 +30,7 @@ namespace LibraryServer.Controllers
             }
 
             JwtSecurityToken token = await jwtHandler.GetTokenAsync(user);
-            string jwtString = new JwtSecurityTokenHandler().WriteToken(token);
+            var jwtString = new JwtSecurityTokenHandler().WriteToken(token);
             return Ok(new LoginResult
             {
                 Success = true,

@@ -24,7 +24,7 @@ namespace LibraryServer.Controllers
             return await context.Books.ToListAsync();
         }
 
-        // GET: api/Books/5
+        // GET: api/Books/id
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetBook(int id)
         {
