@@ -50,5 +50,11 @@ namespace LibraryServer.Controllers
 
         }
 
+        //[HttpPost("Book")]
+        //public async Task<ActionResult<Book>> SeedBook()
+        //{
+
+        //}
+
     }
 }
