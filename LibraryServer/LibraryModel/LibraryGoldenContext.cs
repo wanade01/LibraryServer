@@ -54,6 +54,8 @@ public partial class LibraryGoldenContext : IdentityDbContext<LibraryUser>
             entity.Property(e => e.PatronLname)
                 .HasMaxLength(30)
                 .HasColumnName("PatronLName");
+            entity.Property(e => e.PatronPassword).HasMaxLength(50);
+            entity.Property(e => e.PatronUsername).HasMaxLength(30);
 
             entity.HasOne(d => d.PatronCheckedBook).WithMany(p => p.Patrons)
                 .HasForeignKey(d => d.PatronCheckedBookId)

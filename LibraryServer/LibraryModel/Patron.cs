@@ -21,5 +21,9 @@ public partial class Patron
 
     public decimal PatronCheckedOverdueAmt { get; set; }
 
+    public string PatronUsername { get; set; } = null!;
+
+    public string PatronPassword { get; set; } = null!;
+
     public virtual Book? PatronCheckedBook { get; set; }
 }

@@ -173,6 +173,16 @@ namespace LibraryServer.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("PatronLName");
 
+                    b.Property<string>("PatronPassword")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PatronUsername")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
                     b.HasKey("PatronId");
 
                     b.HasIndex("PatronCheckedBookId");
