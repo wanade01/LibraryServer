@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LibraryServer.LibraryModel;
 using System.Diagnostics.Metrics;
 using Microsoft.AspNetCore.Authorization;
+using LibraryServer.DTO;
 
 namespace LibraryServer.Controllers
 {
@@ -17,7 +18,6 @@ namespace LibraryServer.Controllers
     {
 
         // GET: api/Books
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
         {
@@ -28,35 +28,16 @@ namespace LibraryServer.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Book>> GetBook(int id)
         {
-            var country = await context.Books.FindAsync(id);
+            Book? book = await context.Books.FindAsync(id);
 
-            if (country == null)
+            if (book == null)
             {
                 return NotFound();
             }
 
-            return country;
+            return book;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Book>> PostBook(Book addBook)
-        {
-            context.Books.Add(addBook);
-            await context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(Book), new {addBook.BookId}, addBook);
-        }
     }
 }
 
-//{
-//    "bookId": 1,
-//    "bookIsbn13": "9780141182636",
-//    "bookIsbn10": "0141182636",
-//    "bookTitle": "NULLThe Great Gatsby",
-//    "bookAuthor": "F. Scott Fitzgerald",
-//    "bookPublisher": "Scribner",
-//    "bookPublishYear": 1925,
-//    "bookGenre": "Classic Fiction",
-//    "patrons": []
-//  }
