@@ -6,12 +6,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LibraryServer.Migrations
 {
     /// <inheritdoc />
-    public partial class Identity7 : Migration
+    public partial class Reset : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+/*            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -48,6 +48,25 @@ namespace LibraryServer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Book",
+                columns: table => new
+                {
+                    BookID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookIsbn13 = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    BookIsbn10 = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    BookTitle = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    BookAuthor = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    BookPublisher = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    BookPublishYear = table.Column<short>(type: "smallint", nullable: false),
+                    BookGenre = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Book", x => x.BookID);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +175,32 @@ namespace LibraryServer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Patron",
+                columns: table => new
+                {
+                    PatronID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PatronFName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    PatronLName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    PatronAddress = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    PatronCheckedBookID = table.Column<int>(type: "int", nullable: true),
+                    PatronCheckedDate = table.Column<DateOnly>(type: "date", nullable: true),
+                    PatronCheckedDueDate = table.Column<DateOnly>(type: "date", nullable: true),
+                    PatronCheckedOverdueAmt = table.Column<decimal>(type: "decimal(9,2)", nullable: false),
+                    PatronUsername = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    PatronPassword = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Patron", x => x.PatronID);
+                    table.ForeignKey(
+                        name: "FK_Patron_Book",
+                        column: x => x.PatronCheckedBookID,
+                        principalTable: "Book",
+                        principalColumn: "BookID");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,6 +239,11 @@ namespace LibraryServer.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Patron_PatronCheckedBookID",
+                table: "Patron",
+                column: "PatronCheckedBookID");*/
         }
 
         /// <inheritdoc />
@@ -215,10 +265,16 @@ namespace LibraryServer.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Patron");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Book");
         }
     }
 }

@@ -20,12 +20,12 @@ builder.Services.AddSwaggerGen(c => {
     {
         Contact = new()
         {
-            Email = "iamavalidemail@csun.edu",
-            Name = "Mike Honcho",
+            Email = "waleed.nadeem.309@csun.edu",
+            Name = "Waleed Nadeem",
             Url = new("https://canvas.csun.edu/courses/128137")
         },
-        Description = "APIs for World Cities",
-        Title = "World Cities APIs",
+        Description = "APIs for LibraryServer",
+        Title = "LibraryServer API",
         Version = "V1"
     });
     OpenApiSecurityScheme jwtSecurityScheme = new()
@@ -83,10 +83,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-app.UseAuthorization();
+app.UseHttpsRedirection();
 app.UseAuthentication();
+app.UseRouting();
+app.UseAuthorization();
 
 
 app.MapControllers();
