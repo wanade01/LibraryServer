@@ -11,7 +11,7 @@ namespace LibraryServer.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-/*            migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -243,7 +243,7 @@ namespace LibraryServer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Patron_PatronCheckedBookID",
                 table: "Patron",
-                column: "PatronCheckedBookID");*/
+                column: "PatronCheckedBookID");
         }
 
         /// <inheritdoc />
